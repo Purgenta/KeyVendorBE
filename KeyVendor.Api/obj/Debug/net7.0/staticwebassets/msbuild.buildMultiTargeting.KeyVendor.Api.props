@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\KeyVendor.Api.props" />
+</Project>

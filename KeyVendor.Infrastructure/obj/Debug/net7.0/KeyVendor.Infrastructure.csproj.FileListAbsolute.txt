@@ -1,0 +1,17 @@
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Infrastructure\bin\Debug\net7.0\KeyVendor.Infrastructure.deps.json
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Infrastructure\bin\Debug\net7.0\KeyVendor.Infrastructure.dll
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Infrastructure\bin\Debug\net7.0\KeyVendor.Infrastructure.pdb
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Infrastructure\bin\Debug\net7.0\KeyVendor.Application.dll
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Infrastructure\bin\Debug\net7.0\KeyVendor.Domain.dll
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Infrastructure\bin\Debug\net7.0\KeyVendor.Application.pdb
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Infrastructure\bin\Debug\net7.0\KeyVendor.Domain.pdb
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Infrastructure\obj\Debug\net7.0\KeyVendor.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Infrastructure\obj\Debug\net7.0\KeyVendor.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Infrastructure\obj\Debug\net7.0\KeyVendor.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Infrastructure\obj\Debug\net7.0\KeyVendor.Infrastructure.AssemblyInfo.cs
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Infrastructure\obj\Debug\net7.0\KeyVendor.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Infrastructure\obj\Debug\net7.0\KeyVendor.Infrastructure.csproj.CopyComplete
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Infrastructure\obj\Debug\net7.0\KeyVendor.Infrastructure.dll
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Infrastructure\obj\Debug\net7.0\refint\KeyVendor.Infrastructure.dll
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Infrastructure\obj\Debug\net7.0\KeyVendor.Infrastructure.pdb
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Infrastructure\obj\Debug\net7.0\ref\KeyVendor.Infrastructure.dll

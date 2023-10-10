@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>KeyVendor.Domain</AssemblyName>
+        <RootNamespace>KeyVendor.Domain</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MongoDB.Entities" Version="22.1.0"/>
+    </ItemGroup>
+
+
+</Project>
