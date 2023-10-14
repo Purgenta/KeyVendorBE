@@ -2,7 +2,7 @@
 
 public class AuthorizationRoles
 {
-    public const string Administrator = "Administrator";
+    public const string Director = "Director";
     public const string Customer = "Customer";
-    public const string Marketing = "Marketing";
+    public const string Sales = "Sales";
 }

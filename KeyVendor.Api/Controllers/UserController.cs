@@ -1,7 +1,6 @@
 ﻿using KeyVendor.Application.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RentalCar.Api.Controllers;
 
 namespace KeyVendor.Api.Controllers;
 
