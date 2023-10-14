@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using KeyVendor.Application.Common.Interfaces;
+using KeyVendor.Infrastructure.Auth;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 using MongoDB.Entities;
@@ -22,6 +24,11 @@ public static class DependencyInjection
             })
             .GetAwaiter()
             .GetResult();
+        serviceCollection.Configure<JwtConfiguration>(configuration.GetSection("JwtConfiguration"));
+        serviceCollection.Configure<MongoDbConfiguration>(configuration.GetSection("MongoDbConfiguration"));
+
+        serviceCollection.AddScoped<IAuthService, AuthService>();
+        serviceCollection.AddScoped<IUserService, UserService>();
 
         return serviceCollection;
     }

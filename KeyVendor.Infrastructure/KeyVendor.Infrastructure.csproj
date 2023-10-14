@@ -11,4 +11,10 @@
         <ProjectReference Include="..\KeyVendor.Application\KeyVendor.Application.csproj"/>
     </ItemGroup>
 
+
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.0-rc.2.22476.2" />
+    </ItemGroup>
+
 </Project>

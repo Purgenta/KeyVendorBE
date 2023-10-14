@@ -58,3 +58,13 @@ C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Api\obj\Debug\net7.0\refint\Ke
 C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Api\obj\Debug\net7.0\KeyVendor.Api.pdb
 C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Api\obj\Debug\net7.0\KeyVendor.Api.genruntimeconfig.cache
 C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Api\obj\Debug\net7.0\ref\KeyVendor.Api.dll
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Api\bin\Debug\net7.0\Ardalis.GuardClauses.dll
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Api\bin\Debug\net7.0\AspNetCore.Identity.MongoDbCore.dll
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Api\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Api\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Api\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Api\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Api\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Api\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Api\bin\Debug\net7.0\MongoDbGenericRepository.dll
+C:\Users\Nikola\RiderProjects\KeyVendor\KeyVendor.Api\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
