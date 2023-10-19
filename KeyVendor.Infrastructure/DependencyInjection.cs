@@ -30,6 +30,7 @@ public static class DependencyInjection
         serviceCollection.AddScoped<IAuthService, AuthService>();
         serviceCollection.AddScoped<IUserService, UserService>();
 
+
         return serviceCollection;
     }
 }
