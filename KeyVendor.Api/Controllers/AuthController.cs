@@ -4,14 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KeyVendor.Api.Controllers;
 
+[Route("auth")]
 public class AuthController : ApiControllerBase
 {
     [AllowAnonymous]
-    [HttpPost("BeginLogin")]
+    [HttpPost("login")]
     public async Task<ActionResult> BeginLogin(BeginLoginCommand command) => Ok(await Mediator.Send(command));
 
     [AllowAnonymous]
-    [HttpGet("{validationToken}/CompleteLogin")]
+    [HttpGet("{validationToken}/completelogin")]
     public async Task<ActionResult> CompleteLogin([FromRoute] string validationToken) =>
         Ok(await Mediator.Send(new CompleteLoginCommand(validationToken)));
 }

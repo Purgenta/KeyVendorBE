@@ -7,7 +7,7 @@ public class Vendor : BaseEntity
 {
     public Vendor(string name, User createdBy)
     {
-        this.Name = Name;
+        this.Name = name;
         this.CreatedBy = createdBy;
         this.Active = true;
     }
