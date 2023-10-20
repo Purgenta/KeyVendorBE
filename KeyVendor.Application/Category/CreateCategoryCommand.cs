@@ -16,6 +16,7 @@ public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryComman
             .ExecuteSingleAsync(cancellation: cancellationToken);
         var createdCategory = new Domain.Entities.Category();
         createdCategory.Name = request.CategoryDto.Name;
+        if (parent == null) createdCategory.IsRoot = true;
         await createdCategory.SaveAsync(cancellation: cancellationToken);
         if (parent != null)
         {

@@ -18,7 +18,7 @@ public class GetAllRootCategoriesHandler : IRequestHandler<GetAllRootCategoriesQ
 
     public async Task<List<CategoryDto>> Handle(GetAllRootCategoriesQuery request, CancellationToken cancellationToken)
     {
-        var categories = await DB.Find<Domain.Entities.Category>().Match(x => x.ChildCategories.Count != 0)
+        var categories = await DB.Find<Domain.Entities.Category>().Match(x => x.IsRoot == true)
             .ExecuteAsync(cancellation: cancellationToken);
         return _mapper.Map<List<CategoryDto>>(categories);
     }

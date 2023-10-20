@@ -6,11 +6,13 @@ namespace KeyVendor.Domain.Entities;
 public class Category : BaseEntity
 {
     public string Name { get; set; }
+    public bool IsRoot { get; set; }
 
     public Category()
     {
         this.Active = true;
         this.ChildCategories = new List<ChildCategory>();
+        this.IsRoot = false;
     }
 
     public List<ChildCategory> ChildCategories { get; set; }
