@@ -11,17 +11,15 @@ public class Key : BaseEntity
     public List<string> LicensedFor { get; set; }
 
     public One<Vendor> Vendor { get; set; }
-    public Date ValidUntil { get; set; }
-    public string ImageUrl { get; set; }
+    public DateTime ValidUntil { get; set; }
+    private double Price { get; set; }
 
-    public Key(string value, User createdBy, One<Category> category, List<string> licensedFor, Date validUntil,
-        string imageUrl)
+    public Key(string value, User createdBy, List<string> licensedFor, DateTime validUntil, double price)
     {
         this.ValidUntil = validUntil;
         this.Value = value;
         this.CreatedBy = createdBy;
-        this.Category = category;
         this.LicensedFor = licensedFor;
-        this.ImageUrl = imageUrl;
+        this.Price = price;
     }
 }

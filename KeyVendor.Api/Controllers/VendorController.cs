@@ -12,8 +12,8 @@ namespace KeyVendor.Api.Controllers;
 public class VendorController : ApiControllerBase
 {
     [HttpPost("create")]
-    [AllowAnonymous]
-    public async void CreateVendor(CreateVendorDto createVendor)
+    [Authorize]
+    public async Task CreateVendor(CreateVendorDto createVendor)
     {
         var user = await UserService.GetUserByEmailAsync(this.GetUserFromCtx());
         await Mediator.Send(new CreateVendorCommand(createVendor, user!));

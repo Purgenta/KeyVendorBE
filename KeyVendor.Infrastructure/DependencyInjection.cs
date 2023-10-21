@@ -26,9 +26,11 @@ public static class DependencyInjection
             .GetResult();
         serviceCollection.Configure<JwtConfiguration>(configuration.GetSection("JwtConfiguration"));
         serviceCollection.Configure<MongoDbConfiguration>(configuration.GetSection("MongoDbConfiguration"));
+        serviceCollection.Configure<UploadConfiguration>(configuration.GetSection("UploadsConfiguration"));
 
         serviceCollection.AddScoped<IAuthService, AuthService>();
         serviceCollection.AddScoped<IUserService, UserService>();
+        serviceCollection.AddScoped<IFileUploadService, FileUploadService>();
 
 
         return serviceCollection;

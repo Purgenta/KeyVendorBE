@@ -1,15 +1,16 @@
-﻿using MongoDbGenericRepository.Attributes;
+﻿using MongoDB.Entities;
+using MongoDbGenericRepository.Attributes;
 
 namespace KeyVendor.Domain.Entities;
 
 [CollectionName("vendor")]
 public class Vendor : BaseEntity
 {
-    public Vendor(string name, User createdBy)
+    [OwnerSide] public Many<Key> Keys { get; set; }
+
+    public Vendor()
     {
-        this.Name = name;
-        this.CreatedBy = createdBy;
-        this.Active = true;
+        this.InitOneToMany(() => Keys);
     }
 
     public string Name { get; set; }

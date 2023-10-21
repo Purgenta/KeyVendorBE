@@ -7,9 +7,11 @@ public class Category : BaseEntity
 {
     public string Name { get; set; }
     public bool IsRoot { get; set; }
+    [OwnerSide] public Many<Key> Keys { get; set; }
 
     public Category()
     {
+        this.InitOneToMany(() => Keys);
         this.Active = true;
         this.ChildCategories = new List<ChildCategory>();
         this.IsRoot = false;

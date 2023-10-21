@@ -1,3 +1,6 @@
-﻿namespace KeyVendor.Application.Common.Dto.Key;
+﻿using Microsoft.AspNetCore.Http;
 
-public record CreateKeyDto(string Value, DateTime ValidUntil, List<string> LicensedFor, string CategoryId);
+namespace KeyVendor.Application.Common.Dto.Key;
+
+public record CreateKeyDto(string Value, string ValidUntil, List<string>? LicensedFor, string CategoryId,
+    string VendorId, IFormFile Photo, double Price);

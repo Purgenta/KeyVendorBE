@@ -17,7 +17,9 @@ public class CreateVendorCommandHandler : IRequestHandler<CreateVendorCommand>
         var vendor = await DB.Find<Domain.Entities.Vendor>().Match(x => x.Name.Equals(request.Req.Name))
             .ExecuteSingleAsync(cancellationToken);
         if (vendor != null) throw new Exception("Such a vendor already exists");
-        var createdVendor = new Domain.Entities.Vendor(request.Req.Name, request.User);
+        var createdVendor = new Domain.Entities.Vendor();
+        createdVendor.Name = request.Req.Name;
+        createdVendor.CreatedBy = request.User;
         await createdVendor.SaveAsync(cancellation: cancellationToken);
     }
 }
