@@ -1,4 +1,6 @@
 ﻿using KeyVendor.Application.Category;
+using KeyVendor.Application.Common.Dto.Key;
+using KeyVendor.Application.Key.Query;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,5 +29,11 @@ public class CategoryController : ApiControllerBase
     {
         var categories = await Mediator.Send(new GetAllRootCategoriesQuery());
         return Ok(categories);
+    }
+
+    [HttpGet("key/getbycategory")]
+    public async Task<ActionResult> KeysByCategory([FromQuery] FilterDto filterDto)
+    {
+        return Ok(await Mediator.Send(new GetFilteredKey(filterDto)));
     }
 }

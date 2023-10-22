@@ -26,4 +26,18 @@ public class KeyController : ApiControllerBase
         var image = Mediator.Send(new GetKeyQuery(id));
         return File(image.Result, "image/jpeg");
     }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult> GetKey(string id)
+    {
+        return Ok(await Mediator.Send(new GetKeyById(id)));
+    }
+
+    [HttpPut("update/{id}")]
+    [Consumes("multipart/form-data")]
+    [Authorize]
+    public async Task<ActionResult> UpdateKey([FromForm] CreateKeyDto key, string id)
+    {
+        return Ok(await Mediator.Send(new GetKeyById(id)));
+    }
 }

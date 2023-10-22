@@ -21,14 +21,17 @@ public class CreateKeyCommandHandler : IRequestHandler<CreateKeyCommand>
         var data = request.Data;
         var category = await DB.Find<Domain.Entities.Category>()
             .OneAsync(request.Data.CategoryId, cancellation: cancellationToken);
-        if (category == null) throw new Exception("No such category exists");
+        if (category == null || category.ChildCategories.Count != 0)
+            throw new Exception("No such category exists/Not a valid category");
         var vendor = await DB.Find<Domain.Entities.Vendor>()
             .OneAsync(request.Data.VendorId, cancellation: cancellationToken);
         if (vendor == null) throw new Exception("No such vendor exists");
-        var key = new Domain.Entities.Key(data.Value, request.user, data.LicensedFor, DateTime.Parse(data.ValidUntil),
+        var key = new Domain.Entities.Key(data.Value, data.Name, request.user, data.LicensedFor,
+            DateTime.Parse(data.ValidUntil),
             data.Price);
         key.Category = category.ToReference();
         key.Vendor = vendor.ToReference();
+        key.Active = true;
         await key.SaveAsync(cancellation: cancellationToken);
         await category.Keys.AddAsync(key, cancellation: cancellationToken);
         await vendor.Keys.AddAsync(key, cancellation: cancellationToken);
