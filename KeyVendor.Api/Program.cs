@@ -50,6 +50,8 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 builder.Services.AddApplication();
+var uploadConfiguration = new UploadConfiguration();
+builder.Configuration.GetSection("UploadsConfiguration").Bind(uploadConfiguration);
 builder.Services.AddInfrastructure(builder.Configuration);
 
 var mongoDbConfiguration = new MongoDbConfiguration();
@@ -70,7 +72,6 @@ var jwtConfiguration = new JwtConfiguration();
 builder.Configuration
     .GetSection("JwtConfiguration")
     .Bind(jwtConfiguration);
-
 builder.Services
     .AddAuthentication(options =>
     {

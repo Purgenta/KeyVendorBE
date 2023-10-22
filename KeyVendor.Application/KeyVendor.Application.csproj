@@ -17,7 +17,14 @@
 
     <ItemGroup>
         <ProjectReference Include="..\KeyVendor.Domain\KeyVendor.Domain.csproj"/>
+
+
+
+
+
     </ItemGroup>
+
+
 
 
 </Project>
