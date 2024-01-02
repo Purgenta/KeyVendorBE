@@ -3,7 +3,7 @@ using KeyVendor.Application.Common.Interfaces;
 using MediatR;
 using KeyVendor.Application.Common.Contants;
 
-namespace KeyVendor.Application.User;
+namespace KeyVendor.Application.User.Commands;
 
 public record CreateUserCommand(CreateUserDto User) : IRequest;
 

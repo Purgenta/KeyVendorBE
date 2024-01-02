@@ -20,7 +20,7 @@ public class VendorController : ApiControllerBase
         Ok();
     }
 
-    [HttpGet("allvendors")]
+    [HttpGet("all")]
     public async Task<ActionResult> GetAllVendors()
     {
         var result = await Mediator.Send(new GetAllVendorQuery());
