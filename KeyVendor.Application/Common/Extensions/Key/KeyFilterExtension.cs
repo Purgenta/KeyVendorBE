@@ -10,6 +10,7 @@ public static class KeyFilterExtension
                 Domain.Entities.Key> query,
             FilterDto filters)
     {
+        query = query.Match(x => x.Active == true);
         if (!string.IsNullOrEmpty(filters.SearchQuery))
         {
             query = (PagedSearch<Domain.Entities.Key>)query.Match(x => x.Name

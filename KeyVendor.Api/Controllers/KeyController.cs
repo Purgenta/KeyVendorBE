@@ -44,8 +44,18 @@ public class KeyController : ApiControllerBase
     }
 
     [HttpGet("find")]
-    public async Task<ActionResult> KeysByCategory([FromQuery] FilterDto filterDto)
+    public async Task<ActionResult> FilteredKeys([FromQuery] FilterDto filterDto)
     {
         return Ok(await Mediator.Send(new GetFilteredKey(filterDto)));
+    }
+
+    [HttpDelete("delete/{id}")]
+    [Authorize(Roles = AuthorizationRoles.Sales)]
+    public async Task<ActionResult> DeleteKey([FromRoute] string id)
+    {
+        var email = this.GetUserFromCtx();
+        var user = await this.UserService.GetUserByEmailAsync(email);
+        await Mediator.Send(new DeleteKeyCommand(id, user!));
+        return Ok();
     }
 }
