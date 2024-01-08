@@ -9,6 +9,5 @@ public class CreateFilterDtoValidator : AbstractValidator<FilterDto>
     {
         RuleFor(x => x.Page).NotEmpty().Must(x => x > 0);
         RuleFor(x => x.Size).NotEmpty().Must(x => x > 0);
-        RuleFor(x => x.CategoryId).NotEmpty();
     }
 }

@@ -1,4 +1,5 @@
-﻿using KeyVendor.Application.Common.Dto.Key;
+﻿using KeyVendor.Application.Common.Contants;
+using KeyVendor.Application.Common.Dto.Key;
 using KeyVendor.Application.Key;
 using KeyVendor.Application.Key.Query;
 using Microsoft.AspNetCore.Authorization;
@@ -27,6 +28,7 @@ public class KeyController : ApiControllerBase
         return File(image.Result, "image/jpeg");
     }
 
+
     [HttpGet("{id}")]
     public async Task<ActionResult> GetKey(string id)
     {
@@ -39,5 +41,11 @@ public class KeyController : ApiControllerBase
     public async Task<ActionResult> UpdateKey([FromForm] CreateKeyDto key, string id)
     {
         return Ok(await Mediator.Send(new GetKeyById(id)));
+    }
+
+    [HttpGet("find")]
+    public async Task<ActionResult> KeysByCategory([FromQuery] FilterDto filterDto)
+    {
+        return Ok(await Mediator.Send(new GetFilteredKey(filterDto)));
     }
 }

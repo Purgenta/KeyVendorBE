@@ -28,7 +28,7 @@ public class CreateKeyCommandHandler : IRequestHandler<CreateKeyCommand>
         if (vendor == null) throw new Exception("No such vendor exists");
         var key = new Domain.Entities.Key(data.Value, data.Name, request.user, data.LicensedFor,
             DateTime.Parse(data.ValidUntil),
-            data.Price);
+            data.Price, data.Tax);
         key.Category = category.ToReference();
         key.Vendor = vendor.ToReference();
         key.Active = true;

@@ -1,6 +1,6 @@
 ﻿namespace KeyVendor.Application.Common.Dto.Key;
 
-public record PaginatedKey(List<HiddenKeyDto> Keys, PaginationDto Pagination)
+public record PaginatedKey(List<HiddenKeyDto> Data, PaginationDto Pagination)
 {
     internal PaginatedKey AddPagination(PaginationDto paginationDto)
     {

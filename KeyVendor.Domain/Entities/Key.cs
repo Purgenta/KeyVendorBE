@@ -14,8 +14,10 @@ public class Key : BaseEntity
     public One<Vendor> Vendor { get; set; }
     public DateTime ValidUntil { get; set; }
     public double Price { get; set; }
+    public double Tax { get; set; }
 
-    public Key(string value, string name, User createdBy, List<string> licensedFor, DateTime validUntil, double price)
+    public Key(string value, string name, User createdBy, List<string> licensedFor, DateTime validUntil, double price,
+        double tax)
     {
         this.ValidUntil = validUntil;
         this.Value = value;
@@ -24,5 +26,6 @@ public class Key : BaseEntity
         this.Price = price;
         this.Name = name;
         this.Active = true;
+        this.Tax = tax;
     }
 }

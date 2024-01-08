@@ -10,10 +10,12 @@ public class CreateKeyDtoValidator : AbstractValidator<CreateKeyDto>
     {
         RuleFor(x => x.Value)
             .NotEmpty();
-        RuleFor(x => x.ValidUntil).Must(BeAValidDate).WithMessage("Date is invalid (has to be in future)");
+        RuleFor(x => x.ValidUntil).NotEmpty().NotNull().Must(BeAValidDate)
+            .WithMessage("Date is invalid (has to be in future)");
         RuleFor(x => x.CategoryId).NotEmpty();
-        RuleFor(x => x.Photo).Must(BeValidPhoto).WithMessage("Image must be of type image/jpeg");
-        RuleFor(x => x.Price).Must(ValidPrice).WithMessage("Minimum price is 0.1");
+        RuleFor(x => x.Photo).NotEmpty().NotNull().Must(BeValidPhoto).WithMessage("Image must be of type image/jpeg");
+        RuleFor(x => x.Price).NotEmpty().Must(ValidPrice).WithMessage("Minimum price is 0.1");
+        RuleFor(x => x.Tax).NotNull().Must(ValidPrice).WithMessage("Tax can be 0% or higher");
     }
 
     private static bool BeValidPhoto(IFormFile photo)
@@ -24,6 +26,11 @@ public class CreateKeyDtoValidator : AbstractValidator<CreateKeyDto>
     private static bool ValidPrice(double price)
     {
         return price > 0.1;
+    }
+
+    private static bool ValidTax(double tax)
+    {
+        return tax >= 0.0;
     }
 
     private static bool BeAValidDate(string date)

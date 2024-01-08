@@ -20,7 +20,7 @@ public class KeyProfile : Profile
         var category = await key.Category.ToEntityAsync();
         var vendor = await key.Vendor.ToEntityAsync();
         return new HiddenKeyDto(key.ID, key.Price, key.LicensedFor, key.Name,
-            category.ID, vendor.ID, key.CreatedBy.Email);
+            category.ID, vendor.ID, key.CreatedBy.Email, key.Tax, key.ValidUntil.Date);
     }
 
     public async Task<PaginatedKey> PaginatedHiddenKey(IEnumerable<Domain.Entities.Key> keys)
