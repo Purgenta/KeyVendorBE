@@ -14,7 +14,8 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand>
         var order = request.CreateOrderDto;
         var keys = await DB.Find<Domain.Entities.Key>().Match(key => order.Keys.Contains(key.ID))
             .ExecuteAsync(cancellation: cancellationToken);
-        var totalPrice = keys.Sum(key => key.Price);
+
+        var totalPrice = keys.Sum(key => key.Price + (key.Tax * key.Price / 100));
         if (user.Money < totalPrice)
             throw new Exception("Not enough money");
         if (!keys.All(key => key.CreatedBy.Email.Equals(keys.First().CreatedBy.Email)))
@@ -22,11 +23,16 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand>
             throw new Exception("Keys are not from the same seller");
         }
 
+        if (keys.Count != 1 && !keys.All(key => key.Name != keys.First().Name && key.LicensedFor.Count != 0))
+        {
+            throw new Exception("Keys must have the same name to be eligible for group buy licencing");
+        }
+
         var seller = await DB.Find<Domain.Entities.User>()
             .Match(user => user.Email.Equals(keys.First().CreatedBy.Email))
             .ExecuteSingleAsync(cancellation: cancellationToken);
-        var createdOrder = new Domain.Entities.Order(totalPrice, new One<Domain.Entities.User>(user),
-            new Many<Domain.Entities.Key>(), new One<Domain.Entities.User>(seller));
+        var createdOrder = new Domain.Entities.Order(totalPrice, new(user.ID),
+            new Many<Domain.Entities.Key>(), new(seller.ID));
         await createdOrder.SaveAsync(cancellation: cancellationToken);
         await createdOrder.Keys.AddAsync(keys, cancellation: cancellationToken);
     }

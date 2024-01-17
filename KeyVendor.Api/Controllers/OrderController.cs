@@ -1,4 +1,5 @@
-﻿using KeyVendor.Application.Common.Contants;
+﻿using System.Net;
+using KeyVendor.Application.Common.Contants;
 using KeyVendor.Application.Common.Dto.Order;
 using KeyVendor.Application.Order.Commands;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +11,7 @@ namespace KeyVendor.Api.Controllers;
 public class OrderController : ApiControllerBase
 {
     [HttpPost("create")]
-    [Authorize(AuthorizationRoles.Sales)]
+    [Authorize]
     public async Task<IActionResult> CreateOrderAsync(CreateOrderDto createOrderDto)
     {
         var email = this.GetUserFromCtx();
