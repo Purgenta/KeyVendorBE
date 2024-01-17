@@ -15,10 +15,9 @@ public class User : MongoIdentityUser<Guid>, IEntity
         return ObjectId.GenerateNewId().ToString();
     }
 
-    public User(double money)
+    public User()
     {
         this.InitOneToMany(() => Orders);
-        this.Money = money;
     }
 
     public string? ID { get; set; }
