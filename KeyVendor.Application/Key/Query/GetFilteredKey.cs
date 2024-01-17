@@ -20,7 +20,7 @@ public record GetFilteredKeyHandler : IRequestHandler<GetFilteredKey, PaginatedK
 
     public async Task<PaginatedKey> Handle(GetFilteredKey request, CancellationToken cancellationToken)
     {
-        var keys = await DB.PagedSearch<Domain.Entities.Key>().Sort(x => x.Name, Order.Ascending)
+        var keys = await DB.PagedSearch<Domain.Entities.Key>().Sort(x => x.Name, MongoDB.Entities.Order.Ascending)
             .ApplyFilters(request.FilterDto)
             .PageNumber(request.FilterDto.Page).PageSize(request.FilterDto.Size)
             .ExecuteAsync(cancellation: cancellationToken);
