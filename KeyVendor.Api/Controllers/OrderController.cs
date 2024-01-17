@@ -19,4 +19,14 @@ public class OrderController : ApiControllerBase
         await this.Mediator.Send(new CreateOrderCommand(createOrderDto, user));
         return Ok();
     }
+
+    [HttpPut("update/{id}")]
+    [Authorize(AuthorizationRoles.Sales)]
+    public async Task<IActionResult> UpdateOrderAsync(UpdateOrderDto updateOrderDto, string id)
+    {
+        var email = this.GetUserFromCtx();
+        var user = this.UserService.GetUserByEmailAsync(email).Result;
+        await this.Mediator.Send(new UpdateOrderCommand(id, updateOrderDto, user));
+        return Ok();
+    }
 }
