@@ -29,7 +29,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand>
         }
 
         var seller = await DB.Find<Domain.Entities.User>()
-            .Match(user => user.Email.Equals(keys.First().CreatedBy.ID))
+            .Match(user => user.ID.Equals(keys.First().CreatedBy.ID))
             .ExecuteSingleAsync(cancellation: cancellationToken);
         var createdOrder = new Domain.Entities.Order(totalPrice, new(user.ID),
             new Many<Domain.Entities.Key>(), new(seller.ID));

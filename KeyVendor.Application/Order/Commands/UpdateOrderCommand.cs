@@ -19,7 +19,7 @@ public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand>
             throw new Exception("Order not found");
         }
 
-        if (order.Seller.ID != user.ID)
+        if (order.Seller.ID.Equals(user.ID) == false)
         {
             throw new Exception("You are not the seller of this order");
         }
@@ -32,7 +32,7 @@ public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand>
         order.Status = request.UpdateOrderDto.OrderStatus;
         if (request.UpdateOrderDto.OrderStatus == OrderStatus.Completed)
         {
-            var buyer = await order.Buyer.ToEntityAsync();
+            var buyer = await order.Buyer.ToEntityAsync(cancellation: cancellationToken);
             buyer.Money -= order.TotalPrice;
             await buyer.SaveAsync(cancellation: cancellationToken);
         }
