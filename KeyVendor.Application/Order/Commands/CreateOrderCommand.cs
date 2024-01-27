@@ -18,7 +18,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand>
         var totalPrice = keys.Sum(key => key.Price + (key.Tax * key.Price / 100));
         if (user.Money < totalPrice)
             throw new Exception("Not enough money");
-        if (!keys.All(key => key.CreatedBy.Email.Equals(keys.First().CreatedBy.Email)))
+        if (!keys.All(key => key.CreatedBy.ID.Equals(keys.First().CreatedBy.ID)))
         {
             throw new Exception("Keys are not from the same seller");
         }
@@ -29,7 +29,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand>
         }
 
         var seller = await DB.Find<Domain.Entities.User>()
-            .Match(user => user.Email.Equals(keys.First().CreatedBy.Email))
+            .Match(user => user.Email.Equals(keys.First().CreatedBy.ID))
             .ExecuteSingleAsync(cancellation: cancellationToken);
         var createdOrder = new Domain.Entities.Order(totalPrice, new(user.ID),
             new Many<Domain.Entities.Key>(), new(seller.ID));

@@ -7,6 +7,7 @@ namespace KeyVendor.Domain.Entities;
 public class Vendor : BaseEntity
 {
     [OwnerSide] public Many<Key> Keys { get; set; }
+    public One<User> CreatedBy { get; set; }
 
     public Vendor()
     {
@@ -14,5 +15,4 @@ public class Vendor : BaseEntity
     }
 
     public string Name { get; set; }
-    public User CreatedBy { get; set; }
 }

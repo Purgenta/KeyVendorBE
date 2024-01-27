@@ -20,8 +20,6 @@ public static class KeyFilterExtension
 
         if (!string.IsNullOrEmpty(filters.CategoryId))
             query = query.Match(x => x.Category.ID == filters.CategoryId).Match(x => x.Active == true);
-        if (!string.IsNullOrEmpty(filters.Email))
-            query = query.Match(x => x.CreatedBy.Email!.ToString() == filters.Email);
         return query;
     }
 }

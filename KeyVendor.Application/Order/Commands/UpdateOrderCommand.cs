@@ -32,9 +32,8 @@ public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand>
         order.Status = request.UpdateOrderDto.OrderStatus;
         if (request.UpdateOrderDto.OrderStatus == OrderStatus.Completed)
         {
-            var buyer = await order.User.ToEntityAsync();
+            var buyer = await order.Buyer.ToEntityAsync();
             buyer.Money -= order.TotalPrice;
-            var buyerOrders = buyer.Orders;
             await buyer.SaveAsync(cancellation: cancellationToken);
         }
     }

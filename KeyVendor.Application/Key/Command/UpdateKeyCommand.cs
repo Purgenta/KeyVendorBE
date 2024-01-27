@@ -20,7 +20,7 @@ public class UpdateKeyCommandHandler : IRequestHandler<UpdateKeyCommand>
     {
         var key = await DB.Find<Domain.Entities.Key>().OneAsync(ID: request.Id, cancellation: cancellationToken);
         if (key == null) throw new Exception("Such a key doesn't exist");
-        if (key.CreatedBy.Email != request.user.Email) throw new Exception("You're not allowed to make changes");
+        if (key.CreatedBy.ID != request.user.ID) throw new Exception("You're not allowed to make changes");
         var category = await key.Category.ToEntityAsync(cancellation: cancellationToken);
         var vendor = await key.Category.ToEntityAsync(cancellation: cancellationToken);
         if (request.dto.CategoryId != category!.ID)
@@ -40,6 +40,7 @@ public class UpdateKeyCommandHandler : IRequestHandler<UpdateKeyCommand>
             await vendor.Keys.RemoveAsync(key, cancellation: cancellationToken);
             await newVendor.Keys.AddAsync(key, cancellation: cancellationToken);
         }
+
         await _service.SaveKeyImage(request.dto.Photo, key.ID);
     }
 }

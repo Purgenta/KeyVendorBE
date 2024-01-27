@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
+using MongoDB.Bson;
 using RentalCar.Infrastructure.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -63,7 +64,7 @@ builder.Services
     .AddIdentity<User, Role>()
     .AddRoleManager<RoleManager<Role>>()
     .AddUserManager<ApplicationUserManager>()
-    .AddMongoDbStores<User, Role, Guid>(mongoDbConfiguration.ConnectionString,
+    .AddMongoDbStores<User, Role, ObjectId>(mongoDbConfiguration.ConnectionString,
         mongoDbConfiguration.DatabaseName)
     .AddDefaultTokenProviders()
     .AddPasswordlessLoginTokenProvider();

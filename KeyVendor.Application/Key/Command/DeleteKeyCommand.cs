@@ -11,7 +11,7 @@ public class DeleteKeyCommandHandler : IRequestHandler<DeleteKeyCommand>
     {
         var key = await DB.Find<Domain.Entities.Key>().OneAsync(request.Id, cancellation: cancellationToken);
         var res = await DB.Update<Domain.Entities.Key>().MatchID(request.Id)
-            .Match(x => x.CreatedBy.Email == request.User.Email)
+            .Match(x => x.CreatedBy.ID == request.User.ID)
             .Modify(x => x.Active, false)
             .ExecuteAsync(cancellation: cancellationToken);
         if (res.MatchedCount == 0) throw new Exception("No keys matched the description found");
