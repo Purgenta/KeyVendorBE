@@ -29,13 +29,24 @@ public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand>
             throw new Exception("Order is already handled");
         }
 
-        order.Status = request.UpdateOrderDto.OrderStatus;
         if (request.UpdateOrderDto.OrderStatus == OrderStatus.Completed)
         {
             var buyer = await DB.Find<Domain.Entities.User>().Match(user => user.Email.Equals(order.Buyer.Email))
                 .ExecuteSingleAsync(cancellation: cancellationToken);
-            buyer.Money -= order.TotalPrice;
-            await buyer.SaveAsync(cancellation: cancellationToken);
+            if (buyer.Money > order.TotalPrice)
+            {
+                order.Status = OrderStatus.Completed;
+
+                buyer.Money -= order.TotalPrice;
+                await buyer.SaveAsync(cancellation: cancellationToken);
+            }
+            else order.Status = OrderStatus.Cancelled;
         }
+        else
+        {
+            order.Status = OrderStatus.Cancelled;
+        }
+
+        await order.SaveAsync(cancellation: cancellationToken);
     }
 }
