@@ -21,8 +21,7 @@ public class KeyProfile : Profile
     {
         var category = await key.Category.ToEntityAsync();
         var vendor = await key.Vendor.ToEntityAsync();
-        var user = await DB.Find<Domain.Entities.User>().Match(user => user.Id == ObjectId.Parse(key.CreatedBy.ID))
-            .ExecuteSingleAsync();
+        var user = key.CreatedBy;
         return new HiddenKeyDto(key.ID, key.Price, key.LicensedFor, key.Name,
             category.ID, vendor.ID, user.Email, key.Tax, key.ValidUntil.Date);
     }
