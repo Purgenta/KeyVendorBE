@@ -1,5 +1,4 @@
-﻿using System.Net;
-using KeyVendor.Application.Common.Contants;
+﻿using KeyVendor.Application.Common.Contants;
 using KeyVendor.Application.Common.Dto.Order;
 using KeyVendor.Application.Order.Commands;
 using Microsoft.AspNetCore.Authorization;
@@ -28,5 +27,15 @@ public class OrderController : ApiControllerBase
         var user = this.UserService.GetUserByEmailAsync(email).Result;
         await this.Mediator.Send(new UpdateOrderCommand(id, updateOrderDto, user));
         return Ok();
+    }
+
+    [Authorize]
+    [HttpGet("findbybuyer")]
+    public async Task<IActionResult> GetOrdersByUser(FilterByUser request)
+    {
+        var email = this.GetUserFromCtx();
+        var user = this.UserService.GetUserByEmailAsync(email).Result;
+        var filter = new FilterOrderDto(user.Email, null, request.Status, request.Page, request.Size);
+        return Ok(await this.Mediator.Send(filter));
     }
 }
