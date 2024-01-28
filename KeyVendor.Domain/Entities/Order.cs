@@ -1,18 +1,19 @@
 ﻿using System.Runtime.CompilerServices;
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Entities;
 
 namespace KeyVendor.Domain.Entities;
 
 public class Order : BaseEntity
 {
-    public One<User> Buyer { get; set; }
+    public User Buyer { get; set; }
     public Many<Key> Keys { get; set; }
     public double TotalPrice { get; set; }
     public OrderStatus Status { get; set; }
 
-    public One<User> Seller { get; set; }
-
-    public Order(double totalPrice, One<User> buyer, Many<Key> keys, One<User> seller)
+    public User Seller { get; set; }
+    
+    public Order(double totalPrice, User buyer, Many<Key> keys, User seller)
     {
         this.TotalPrice = totalPrice;
         this.Buyer = buyer;

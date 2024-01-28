@@ -32,7 +32,8 @@ public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand>
         order.Status = request.UpdateOrderDto.OrderStatus;
         if (request.UpdateOrderDto.OrderStatus == OrderStatus.Completed)
         {
-            var buyer = await order.Buyer.ToEntityAsync(cancellation: cancellationToken);
+            var buyer = await DB.Find<Domain.Entities.User>().Match(user => user.Email.Equals(order.Buyer.Email))
+                .ExecuteSingleAsync(cancellation: cancellationToken);
             buyer.Money -= order.TotalPrice;
             await buyer.SaveAsync(cancellation: cancellationToken);
         }

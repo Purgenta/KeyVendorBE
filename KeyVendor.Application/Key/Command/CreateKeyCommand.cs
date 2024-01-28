@@ -26,7 +26,7 @@ public class CreateKeyCommandHandler : IRequestHandler<CreateKeyCommand>
         var vendor = await DB.Find<Domain.Entities.Vendor>()
             .OneAsync(request.Data.VendorId, cancellation: cancellationToken);
         if (vendor == null) throw new Exception("No such vendor exists");
-        var key = new Domain.Entities.Key(data.Value, data.Name, request.user.ToReference(), data.LicensedFor,
+        var key = new Domain.Entities.Key(data.Value, data.Name, request.user, data.LicensedFor,
             DateTime.Parse(data.ValidUntil),
             data.Price, data.Tax);
         key.Category = category.ToReference();
@@ -34,7 +34,7 @@ public class CreateKeyCommandHandler : IRequestHandler<CreateKeyCommand>
         key.Active = true;
         await key.SaveAsync(cancellation: cancellationToken);
         await category.Keys.AddAsync(key, cancellation: cancellationToken);
-        await vendor.Keys.AddAsync(key, cancellation: cancellationToken);
+        await vendor.Keys.AddAsync(key, cancellation: cancellationToken); 
         await _fileUploadService.SaveKeyImage(request.Data.Photo, key.ID);
     }
 }

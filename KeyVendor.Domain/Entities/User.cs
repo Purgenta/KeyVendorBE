@@ -2,6 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Entities;
+using ThirdParty.Json.LitJson;
 
 namespace KeyVendor.Domain.Entities;
 
@@ -9,24 +10,14 @@ namespace KeyVendor.Domain.Entities;
 public class User : MongoIdentityUser<ObjectId>, IEntity
 {
     public double Money { get; set; }
-    public Many<Order> Orders { get; set; }
 
-    public Many<Key> Keys { get; set; }
-
-    public Many<Vendor> CreatedVendors { get; set; }
 
     public string GenerateNewID()
     {
         return ObjectId.GenerateNewId().ToString();
     }
 
-    public User()
-    {
-        this.InitOneToMany(() => CreatedVendors);
-        this.InitOneToMany(() => Orders);
-        this.InitOneToMany(() => Keys);
-    }
-
+    [BsonId]
     [BsonIgnore]
     public string? ID
     {

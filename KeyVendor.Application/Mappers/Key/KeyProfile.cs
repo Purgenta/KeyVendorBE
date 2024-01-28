@@ -3,6 +3,8 @@ using KeyVendor.Application.Common.Dto;
 using KeyVendor.Application.Common.Dto.Category;
 using KeyVendor.Application.Common.Dto.Key;
 using KeyVendor.Application.Common.Dto.Vendor;
+using MongoDB.Bson;
+using MongoDB.Entities;
 
 namespace KeyVendor.Application.Mappers.Key;
 
@@ -19,7 +21,8 @@ public class KeyProfile : Profile
     {
         var category = await key.Category.ToEntityAsync();
         var vendor = await key.Vendor.ToEntityAsync();
-        var user = await key.CreatedBy.ToEntityAsync();
+        var user = await DB.Find<Domain.Entities.User>().Match(user => user.Id == ObjectId.Parse(key.CreatedBy.ID))
+            .ExecuteSingleAsync();
         return new HiddenKeyDto(key.ID, key.Price, key.LicensedFor, key.Name,
             category.ID, vendor.ID, user.Email, key.Tax, key.ValidUntil.Date);
     }
