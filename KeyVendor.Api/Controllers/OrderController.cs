@@ -38,4 +38,11 @@ public class OrderController : ApiControllerBase
         var filter = new FilterOrderDto(user.Email, null, request.Status, request.Page, request.Size);
         return Ok(await this.Mediator.Send(filter));
     }
+
+    [Authorize(AuthorizationRoles.Director)]
+    [HttpGet("overview")]
+    public async Task<IActionResult> GetOrdersOverview([FromQuery] OverviewOrderDto filter)
+    {
+        return Ok(await this.Mediator.Send(filter));
+    }
 }
