@@ -1,6 +1,7 @@
 ﻿using KeyVendor.Application.Common.Contants;
 using KeyVendor.Application.Common.Dto.Order;
 using KeyVendor.Application.Order.Commands;
+using KeyVendor.Application.Order.Query;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,5 +45,12 @@ public class OrderController : ApiControllerBase
     public async Task<IActionResult> GetOrdersOverview([FromQuery] OverviewOrderDto filter)
     {
         return Ok(await this.Mediator.Send(filter));
+    }
+
+    [AllowAnonymous]
+    [HttpGet("status/options")]
+    public async Task<IActionResult> GetOrderStatusOptions()
+    {
+        return Ok(await this.Mediator.Send(new OrderOptionsQuery()));
     }
 }
