@@ -18,6 +18,13 @@ public static class KeyFilterExtension
                 .Contains(filters.SearchQuery.ToUpper()));
         }
 
+        if (filters.Price.HasValue)
+        {
+            query = query.Match(x => x.Price >= filters.Price);
+        }
+
+        if (!string.IsNullOrEmpty(filters.VendorId))
+            query = query.Match(x => x.Vendor.ID == filters.VendorId);
         if (!string.IsNullOrEmpty(filters.CategoryId))
             query = query.Match(x => x.Category.ID == filters.CategoryId).Match(x => x.Active == true);
         if (!string.IsNullOrEmpty(filters.Email))
