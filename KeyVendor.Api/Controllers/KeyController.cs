@@ -21,7 +21,7 @@ public class KeyController : ApiControllerBase
         Ok();
     }
 
-    [HttpGet("photo/${id}")]
+    [HttpGet("photo/{id}")]
     public IActionResult GetKeyImage(string id)
     {
         var image = Mediator.Send(new GetKeyQuery(id));
