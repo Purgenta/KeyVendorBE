@@ -77,7 +77,7 @@ public class AuthService : IAuthService
 
                 return new CompleteLoginResponseDto(user.Email,
                     roles,
-                    new JwtSecurityTokenHandler().WriteToken(GenerateJwtToken(authClaims)));
+                    new JwtSecurityTokenHandler().WriteToken(GenerateJwtToken(authClaims)), user.Money);
             }
         }
 
