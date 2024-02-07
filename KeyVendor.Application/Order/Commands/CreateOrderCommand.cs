@@ -1,4 +1,5 @@
 ﻿using KeyVendor.Application.Common.Dto.Order;
+using KeyVendor.Application.Common.Interfaces;
 using MediatR;
 using MongoDB.Entities;
 
@@ -8,6 +9,13 @@ public record CreateOrderCommand(CreateOrderDto CreateOrderDto, Domain.Entities.
 
 public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand>
 {
+    private readonly IUserService _userService;
+
+    public CreateOrderCommandHandler(IUserService userService)
+    {
+        this._userService = userService;
+    }
+
     public async Task Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         var user = request.user;
@@ -18,7 +26,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand>
         var totalPrice = keys.Sum(key => key.Price + (key.Tax * key.Price / 100));
         if (user.Money < totalPrice)
             throw new Exception("Not enough money");
-        if (!keys.All(key => key.CreatedBy.ID.Equals(keys.First().CreatedBy.ID)))
+        if (!keys.All(key => key.CreatedBy.Email.Equals(keys.First().CreatedBy.Email)))
         {
             throw new Exception("Keys are not from the same seller");
         }
@@ -28,12 +36,11 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand>
             throw new Exception("Keys must have the same name to be eligible for group buy licencing");
         }
 
-        var seller = await DB.Find<Domain.Entities.User>()
-            .Match(user => user.ID.Equals(keys.First().CreatedBy.ID))
-            .ExecuteSingleAsync(cancellation: cancellationToken);
-        var createdOrder = new Domain.Entities.Order(totalPrice, user,
-            new Many<Domain.Entities.Key>(), seller);
+        var sellerEmail = keys[0].CreatedBy.Email;
+        var seller = await this._userService.GetUserByEmailAsync(sellerEmail);
+        if (seller == null) throw new Exception("Seller not found");
+        var createdOrder = new Domain.Entities.Order(totalPrice, user, seller);
+        createdOrder.Keys = keys;
         await createdOrder.SaveAsync(cancellation: cancellationToken);
-        await createdOrder.Keys.AddAsync(keys, cancellation: cancellationToken);
     }
 }

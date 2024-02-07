@@ -11,7 +11,7 @@ namespace KeyVendor.Api.Controllers;
 public class OrderController : ApiControllerBase
 {
     [HttpPost("create")]
-    [Authorize]
+    [Authorize()]
     public async Task<IActionResult> CreateOrderAsync(CreateOrderDto createOrderDto)
     {
         var email = this.GetUserFromCtx();
