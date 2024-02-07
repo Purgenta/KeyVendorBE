@@ -32,12 +32,12 @@ public class OrderController : ApiControllerBase
 
     [Authorize]
     [HttpGet("findbybuyer")]
-    public async Task<IActionResult> GetOrdersByUser(FilterByUser request)
+    public async Task<IActionResult> GetOrdersByUser([FromQuery] FilterByUser request)
     {
         var email = this.GetUserFromCtx();
         var user = this.UserService.GetUserByEmailAsync(email).Result;
         var filter = new FilterOrderDto(user.Email, null, request.Status, request.Page, request.Size);
-        return Ok(await this.Mediator.Send(filter));
+        return Ok(await this.Mediator.Send(new FilterOrderQuery(filter)));
     }
 
     [Authorize(AuthorizationRoles.Director)]

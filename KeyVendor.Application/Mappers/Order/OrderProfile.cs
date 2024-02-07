@@ -10,7 +10,7 @@ public class OrderProfile : Profile
 {
     public OrderProfile()
     {
-        CreateMap<IEnumerable<Domain.Entities.Order>, IEnumerable<PaginatedOrderDto>>()
+        CreateMap<IEnumerable<Domain.Entities.Order>, PaginatedOrderDto>()
             .ConstructUsing(x => PaginatedOrderDto(x).Result);
         CreateMap<Domain.Entities.Order, OrderDto>().ConstructUsing(x => OrderDto(x).Result);
     }
@@ -32,7 +32,7 @@ public class OrderProfile : Profile
             order.TotalPrice);
     }
 
-    public async Task<IEnumerable<PaginatedOrderDto>> PaginatedOrderDto(IEnumerable<Domain.Entities.Order> orders)
+    public async Task<PaginatedOrderDto> PaginatedOrderDto(IEnumerable<Domain.Entities.Order> orders)
     {
         var res = new List<OrderDto>();
         foreach (var order in orders)
@@ -40,6 +40,6 @@ public class OrderProfile : Profile
             res.Add(await this.OrderDto(order));
         }
 
-        return new List<PaginatedOrderDto> { new(res, new PaginationDto(0, 0)) };
+        return new PaginatedOrderDto(res, new PaginationDto(0, 0));
     }
 }
