@@ -2,4 +2,4 @@
 
 namespace KeyVendor.Application.Common.Dto.Order;
 
-public record UpdateOrderDto(OrderStatus OrderStatus);
+public record UpdateOrderDto(string Status);

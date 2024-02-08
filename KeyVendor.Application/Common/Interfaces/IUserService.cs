@@ -8,4 +8,5 @@ public interface IUserService
     Task<User?> GetUserAsync(string id);
     Task<User?> GetUserByEmailAsync(string id);
     Task<bool> IsInRoleAsync(User user, string roleName);
+    Task UpdateUserMoneyAsync(string emailAdress, double money);
 }

@@ -21,7 +21,7 @@ public class OrderController : ApiControllerBase
     }
 
     [HttpPut("update/{id}")]
-    [Authorize(AuthorizationRoles.Sales)]
+    [Authorize]
     public async Task<IActionResult> UpdateOrderAsync(UpdateOrderDto updateOrderDto, string id)
     {
         var email = this.GetUserFromCtx();
@@ -40,7 +40,6 @@ public class OrderController : ApiControllerBase
         return Ok(await this.Mediator.Send(new FilterOrderQuery(filter)));
     }
 
-    [Authorize(AuthorizationRoles.Sales)]
     [HttpGet("findbyseller")]
     public async Task<IActionResult> GetOrdersBySeller([FromQuery] FilterByUser request)
     {

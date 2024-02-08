@@ -65,6 +65,16 @@ public class UserService : IUserService
         }
     }
 
+    public async Task UpdateUserMoneyAsync(string emailAdress, double money)
+    {
+        var user = await _userManager.FindByEmailAsync(emailAdress);
+        if (user == null)
+            throw new AuthException("User not found");
+
+        user.Money = money;
+        await _userManager.UpdateAsync(user);
+    }
+
     public Task<User?> GetUserAsync(string id) => _userManager.FindByIdAsync(id);
     public Task<User?> GetUserByEmailAsync(string id) => _userManager.FindByEmailAsync(id);
 
