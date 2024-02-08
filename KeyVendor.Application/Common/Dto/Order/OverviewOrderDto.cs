@@ -3,4 +3,4 @@ using MongoDB.Entities;
 
 namespace KeyVendor.Application.Common.Dto.Order;
 
-public record OverviewOrderDto(DateTime StartDate, DateTime EndDate, OrderStatus Status);
+public record OverviewOrderDto(DateTime StartDate, DateTime EndDate);

@@ -11,7 +11,7 @@ namespace KeyVendor.Api.Controllers;
 public class OrderController : ApiControllerBase
 {
     [HttpPost("create")]
-    [Authorize()]
+    [Authorize]
     public async Task<IActionResult> CreateOrderAsync(CreateOrderDto createOrderDto)
     {
         var email = this.GetUserFromCtx();
@@ -38,6 +38,13 @@ public class OrderController : ApiControllerBase
         var user = this.UserService.GetUserByEmailAsync(email).Result;
         var filter = new FilterOrderDto(user.Email, null, request.Status, request.Page, request.Size);
         return Ok(await this.Mediator.Send(new FilterOrderQuery(filter)));
+    }
+
+    [Authorize]
+    [HttpGet("find")]
+    public async Task<IActionResult> FilterOrders([FromQuery] FilterOrderDto request)
+    {
+        return Ok(await this.Mediator.Send(new FilterOrderQuery(request)));
     }
 
     [HttpGet("findbyseller")]
