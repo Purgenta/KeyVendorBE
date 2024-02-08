@@ -40,6 +40,16 @@ public class OrderController : ApiControllerBase
         return Ok(await this.Mediator.Send(new FilterOrderQuery(filter)));
     }
 
+    [Authorize(AuthorizationRoles.Sales)]
+    [HttpGet("findbyseller")]
+    public async Task<IActionResult> GetOrdersBySeller([FromQuery] FilterByUser request)
+    {
+        var email = this.GetUserFromCtx();
+        var user = this.UserService.GetUserByEmailAsync(email).Result;
+        var filter = new FilterOrderDto(null, user.Email, request.Status, request.Page, request.Size);
+        return Ok(await this.Mediator.Send(new FilterOrderQuery(filter)));
+    }
+
     [Authorize(AuthorizationRoles.Director)]
     [HttpGet("overview")]
     public async Task<IActionResult> GetOrdersOverview([FromQuery] OverviewOrderDto filter)
